@@ -1,0 +1,14 @@
+{
+  "name": "builder-nodejs",
+  "version": "1.0.0",
+  "description": "Construtor de jogos MotivAção",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Jogos"
+  ],
+  "author": "Pedro Roque e Gabriel Bittencourt",
+  "license": "ISC"
+}
