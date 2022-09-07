@@ -1,3 +1,14 @@
-let nome='Roque';
-let idade=24;
-console.log(`Sou ${nome} e tenho ${idade}`);
+const express = require("express");
+const app = express();
+
+
+app.set('view engine', 'ejs');
+
+//rotas
+app.get("/", (req, res)=>{
+    res.render("index");
+})
+
+app.listen(8080,()=>{
+    console.log("Servidor rodando!");
+});

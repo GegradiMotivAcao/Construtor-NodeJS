@@ -1,0 +1,8 @@
+<h1>FORM UPLOAD</h1>
+<label for="file" style="cursor: pointer">
+    <img src="plus.png"><span id="file-text">Select a file</span>
+  </label>
+  
+  <input type="file" id="file"
+    onchange="document.getElementById('file-text').textContent = this.files.length > 0 ? this.files[0].name : 'Select a file'"
+    style="display: none" />
