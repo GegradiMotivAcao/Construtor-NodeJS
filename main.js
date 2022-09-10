@@ -10,14 +10,20 @@ async function handleFileOpen() {
   }
 }
 
+
 function createWindow () {
   const mainWindow = new BrowserWindow({
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
-    }
+    }, resizable: false
   })
-  mainWindow.loadFile('views/index.html')
+  mainWindow.loadFile('views/const-background.html')
 }
+
+ipcMain.on('resize-window', (event, width, height) => {
+    let browserWindow = BrowserWindow.fromWebContents(event.sender)
+    browserWindow.setSize(width,height)
+})
 
 app.whenReady().then(() => {
   ipcMain.handle('dialog:openFile', handleFileOpen)
