@@ -78,6 +78,15 @@ div { position: absolute; }
 	height: 60px;
 	position: absolute;
 }
+
+#botão2 {
+	top: 875px;
+	left: 375px;
+	width: 170px;
+	height: 60px;
+	position: absolute;
+}
+
 #bot_o_positivo___3_colunas {
 	top: -147px;
 	left: -372px;

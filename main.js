@@ -1,4 +1,5 @@
 const {app, BrowserWindow, ipcMain, dialog} = require('electron')
+const { exec } = require("child_process"); //permite executar linha no cmd/terminal
 const path = require('path')
 const fs = require('fs');
 
@@ -25,16 +26,24 @@ ipcMain.on('escreveArquivo', () => {
       });
     });
 
-    /*fs.writeFile("./js/teste.txt", content, (err) => {
-      if(err){
-        console.log("An error ocurred creating the file "+ err.message)
-          return
-      }
-                  
-      console.log("The file has been succesfully saved");
-      return "funcionou"
-  });*/
 })
+
+//Função que chama a linha de comando no prompt/terminal
+ipcMain.on('Executacomando', function ExecutaComando() {
+  exec("mkdir teste13", (error, stdout, stderr) => {
+    if (error) {
+        console.log(`error: ${error.message}`);
+        return;
+    }
+    if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        return;
+    }
+    console.log(`stdout: ${stdout}`);
+});
+})
+
+/////////////////////////////////////////
 
 
 function createWindow () {
