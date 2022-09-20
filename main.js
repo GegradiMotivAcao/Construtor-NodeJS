@@ -4,28 +4,51 @@ const path = require('path')
 const fs = require('fs');
 
 let enderecos = [];
+let enderecoSelect= {};
 
-
+//FUNÇÃO QUE ABRE O DIALOG DE SELECIONAR ARQUIVOS
 async function handleFileOpen() {
   const { canceled, filePaths } = await dialog.showOpenDialog()
   if (canceled) {
     return
   } else {
-    enderecos.push(filePaths[0]);
+  console.log("func dialog: " + filePaths[0])
     return filePaths[0]
   }
 }
 
-ipcMain.on('escreveArquivo', () => {
-  //let content = "Gabiru e Perdigão VS Barça do Ronaldo";
-    console.log("clicou");
-    enderecos.forEach(element => {
-      fs.appendFile('./js/teste.txt', element + "\n", function (err) {
+//escreve caminho do Background no arquivo
+ipcMain.on('escreveBackground', async () => {
+  const pathdoarq = await handleFileOpen();
+  enderecoSelect = {"path": pathdoarq,
+                    "tipo": "1" }
+    enderecos.push(enderecoSelect);
+
+  //ESCREVE NO ARQUIVO 
+  enderecos.forEach(element => {
+      fs.appendFile('./js/teste.txt', "<background>" + element.path + ";"+ element.tipo + "</background>\n", function (err) {
         if (err) throw err;
         console.log('Saved!');
+        enderecos = []; //LIMPA O ARRAY
       });
     });
+})
 
+//escreve caminhos de Elementos no arquivo
+ipcMain.on('escreveElemento', async () => {
+  const pathdoarq = await handleFileOpen();
+  enderecoSelect = {"path": pathdoarq,
+                    "tipo": "2" }
+    enderecos.push(enderecoSelect);
+
+  //ESCREVE NO ARQUIVO 
+  enderecos.forEach(element => {
+      fs.appendFile('./js/teste.txt', "<elemento>" + element.path + ";"+ element.tipo + "</elemento>\n", function (err) {
+        if (err) throw err;
+        console.log('Saved!');
+        enderecos = []; //LIMPA O ARRAY
+      });
+    });
 })
 
 //Função que chama a linha de comando no prompt/terminal
@@ -43,8 +66,9 @@ ipcMain.on('Executacomando', function ExecutaComando() {
 });
 })
 
-/////////////////////////////////////////
 
+/////////////////////////////////////////
+//FUNÇÕES DE JANELA DO ELECTRON
 
 function createWindow () {
   const mainWindow = new BrowserWindow({

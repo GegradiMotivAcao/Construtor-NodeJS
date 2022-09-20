@@ -2,7 +2,8 @@ const { contextBridge, ipcRenderer } = require('electron')
 
 contextBridge.exposeInMainWorld('electronAPI',{
   openFile: () => ipcRenderer.invoke('dialog:openFile'),
-  escreve: () => ipcRenderer.send('escreveArquivo'),
+  escreveElemento: () => ipcRenderer.send('escreveElemento'),
+  escreveBackground: () => ipcRenderer.send('escreveBackground'),
   comando: () => ipcRenderer.send('Executacomando')
 })
 

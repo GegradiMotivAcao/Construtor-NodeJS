@@ -1,3 +1,3 @@
-C:\Users\pedro\Documents\fRETE.mp4
-C:\Users\pedro\Documents\frete2.mp4
-C:\Program Files\Unity\Hub\Editor\2018.4.12f1\Editor\Unity.exe
+<background>C:\Users\pedro\Documents\videofrete.mp4;1</background>
+<elemento>C:\Users\pedro\Documents\FreteAgora.mp4;2</elemento>
+<background>C:\Users\pedro\Documents\videofrete.mp4;1</background>
