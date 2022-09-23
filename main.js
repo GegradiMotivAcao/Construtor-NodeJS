@@ -5,10 +5,22 @@ const fs = require('fs');
 
 let enderecos = [];
 let enderecoSelect= {};
+let Unity="";
+let Projeto="";
 
 //FUNÇÃO QUE ABRE O DIALOG DE SELECIONAR ARQUIVOS
 async function handleFileOpen() {
   const { canceled, filePaths } = await dialog.showOpenDialog()
+  if (canceled) {
+    return
+  } else {
+  console.log("func dialog: " + filePaths[0])
+    return filePaths[0]
+  }
+}
+
+async function handleFolderOpen() {
+  const { canceled, filePaths } = await dialog.showOpenDialog({ properties: ['openDirectory'] })
   if (canceled) {
     return
   } else {
@@ -51,9 +63,24 @@ ipcMain.on('escreveElemento', async () => {
     });
 })
 
+//Recebe o endereço do unity
+ipcMain.on('LocalizaUnity', async () => {
+  const pathdoUnity = await handleFileOpen();
+  Unity = pathdoUnity;
+  console.log("Unity: "+ pathdoUnity);
+})
+
+//Recebe o endereço do projeto
+ipcMain.on('LocalizaProjeto', async () => {
+  const pathdoProjeto = await handleFolderOpen();
+  Projeto = pathdoProjeto;
+  console.log("Proj: "+ pathdoProjeto);
+})
+//Resolver problema de espaço no nome das pastas ao executar comando no cmd
+//C:\\"Program Files"\\Unity\\Hub\\Editor\\2018.4.35f1\\Editor\\unity.exe  -batchmode -quit -projectPath D:\Projetos\GEGRADI\Motivacao-Builder-LOCAL -executeMethod BuilderLinhaComando.PerformBuild'
 //Função que chama a linha de comando no prompt/terminal
 ipcMain.on('Executacomando', function ExecutaComando() {
-  exec("mkdir teste13", (error, stdout, stderr) => {
+  exec( Unity +' -batchmode -quit -projectPath '+ Projeto +' -executeMethod BuilderLinhaComando.PerformBuild', (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
         return;

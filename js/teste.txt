@@ -1,3 +1,6 @@
 <background>C:\Users\pedro\Documents\videofrete.mp4;1</background>
 <elemento>C:\Users\pedro\Documents\FreteAgora.mp4;2</elemento>
 <background>C:\Users\pedro\Documents\videofrete.mp4;1</background>
+<background>undefined;1</background>
+<background>undefined;1</background>
+<background>undefined;1</background>

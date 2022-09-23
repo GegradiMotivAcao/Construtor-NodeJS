@@ -798,6 +798,24 @@ div { position: absolute; }
 	z-index: 99;
 }
 
+#btn_add_unity {
+	top: 120px;
+    left: 1201px;
+    width: 170px;
+    height: 26.25px;
+    position: absolute;
+	z-index: 99;
+}
+
+#btn_add_proj {
+	top: 100px;
+    left: 1201px;
+    width: 170px;
+    height: 26.25px;
+    position: absolute;
+	z-index: 99;
+}
+
 #rectangle_5_ek1 {
 	top: -189px;
 	left: -790px;
