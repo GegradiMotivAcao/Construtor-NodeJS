@@ -76,11 +76,10 @@ ipcMain.on('LocalizaProjeto', async () => {
   Projeto = pathdoProjeto;
   console.log("Proj: "+ pathdoProjeto);
 })
-//Resolver problema de espaço no nome das pastas ao executar comando no cmd
-//C:\\"Program Files"\\Unity\\Hub\\Editor\\2018.4.35f1\\Editor\\unity.exe  -batchmode -quit -projectPath D:\Projetos\GEGRADI\Motivacao-Builder-LOCAL -executeMethod BuilderLinhaComando.PerformBuild'
+
 //Função que chama a linha de comando no prompt/terminal
 ipcMain.on('Executacomando', function ExecutaComando() {
-  exec( Unity +' -batchmode -quit -projectPath '+ Projeto +' -executeMethod BuilderLinhaComando.PerformBuild', (error, stdout, stderr) => {
+  exec( '"'+ Unity +'" -batchmode -quit -projectPath '+ Projeto +' -executeMethod BuilderLinhaComando.PerformBuild', (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
         return;
