@@ -7,12 +7,8 @@ const btn6 = document.getElementById('btn_add_proj')
 
 const filePathElement = document.getElementById('filePath')
 
- // Load the File System to execute our common tasks (CRUD)
-
 //BTN ADD ELEMENTO
 btn.addEventListener('click', async () => {
-  //const filePath = await window.electronAPI.openFile(7)
-  //console.log("teste:"+ filePath);
   //ESCRITA NO ARQUIVO COMO ELEMENTO
   window.electronAPI.escreveElemento();
 

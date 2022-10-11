@@ -799,7 +799,7 @@ div { position: absolute; }
 }
 
 #btn_add_unity {
-	top: 120px;
+	top: 110px;
     left: 1201px;
     width: 170px;
     height: 26.25px;
@@ -808,7 +808,7 @@ div { position: absolute; }
 }
 
 #btn_add_proj {
-	top: 100px;
+	top: 80px;
     left: 1201px;
     width: 170px;
     height: 26.25px;

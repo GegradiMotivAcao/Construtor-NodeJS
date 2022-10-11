@@ -19,6 +19,7 @@ async function handleFileOpen() {
   }
 }
 
+//FUNÇÃO QUE ABRE O DIALOG DE SELECIONAR PASTAS
 async function handleFolderOpen() {
   const { canceled, filePaths } = await dialog.showOpenDialog({ properties: ['openDirectory'] })
   if (canceled) {
@@ -32,35 +33,47 @@ async function handleFolderOpen() {
 //escreve caminho do Background no arquivo
 ipcMain.on('escreveBackground', async () => {
   const pathdoarq = await handleFileOpen();
-  enderecoSelect = {"path": pathdoarq,
-                    "tipo": "1" }
-    enderecos.push(enderecoSelect);
-
-  //ESCREVE NO ARQUIVO 
-  enderecos.forEach(element => {
-      fs.appendFile('./js/teste.txt', "<background>" + element.path + ";"+ element.tipo + "</background>\n", function (err) {
-        if (err) throw err;
-        console.log('Saved!');
-        enderecos = []; //LIMPA O ARRAY
-      });
+  nomeArq = path.basename(pathdoarq);
+  //copia a imagem para o \resources do projeto unity
+  exec( 'copy '+ '"' + pathdoarq +'" '+ '"' + Projeto + '\\Assets\\Resources"', (error, stdout, stderr) => {
+    if (error) {
+        console.log(`error: ${error.message}`);
+        return;
+    }
+    if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        return;
+    }
+    console.log(`stdout: ${stdout}`);
+    fs.appendFile(Projeto + '\\Assets\\Resources\\lista.txt', nomeArq + ";0\n", function (err) {
+      if (err) throw err;
+      console.log('BG Salvo!');
     });
+});
+
 })
 
 //escreve caminhos de Elementos no arquivo
 ipcMain.on('escreveElemento', async () => {
   const pathdoarq = await handleFileOpen();
-  enderecoSelect = {"path": pathdoarq,
-                    "tipo": "2" }
-    enderecos.push(enderecoSelect);
+  nomeArq = path.basename(pathdoarq);
 
-  //ESCREVE NO ARQUIVO 
-  enderecos.forEach(element => {
-      fs.appendFile('./js/teste.txt', "<elemento>" + element.path + ";"+ element.tipo + "</elemento>\n", function (err) {
-        if (err) throw err;
-        console.log('Saved!');
-        enderecos = []; //LIMPA O ARRAY
-      });
+  exec( 'copy '+ '"' + pathdoarq +'" '+ '"' + Projeto + '\\Assets\\Resources"', (error, stdout, stderr) => {
+    if (error) {
+        console.log(`error: ${error.message}`);
+        return;
+    }
+    if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        return;
+    }
+    console.log(`stdout: ${stdout}`);
+    fs.appendFile(Projeto + '\\Assets\\Resources\\lista.txt', nomeArq + ";1\n", function (err) {
+      if (err) throw err;
+      console.log('Elemento Salvo!');
     });
+});
+
 })
 
 //Recebe o endereço do unity
