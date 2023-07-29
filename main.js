@@ -8,6 +8,8 @@ let enderecoSelect= {};
 let Unity="";
 let Projeto="";
 
+//RODAR: npm run start
+
 //FUNÇÃO QUE ABRE O DIALOG DE SELECIONAR ARQUIVOS
 async function handleFileOpen() {
   const { canceled, filePaths } = await dialog.showOpenDialog()
@@ -115,7 +117,7 @@ function createWindow () {
       preload: path.join(__dirname, 'preload.js')
     }, resizable: false
   })
-  mainWindow.loadFile('views/const-background.html')
+  mainWindow.loadFile('views/construtor.html')
 }
 
 ipcMain.on('resize-window', (event, width, height) => {

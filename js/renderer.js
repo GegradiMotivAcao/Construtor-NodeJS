@@ -1,4 +1,4 @@
-const btn = document.getElementById('bot_o_add_cls_a')
+const btn = document.getElementById('btn_add_imagens')
 const btn2 = document.getElementById('bot_o_positivo_2_colunas_cls_a')
 const btn3 = document.getElementById('botão2')
 const btn4 = document.getElementById('btn_add_bg')
@@ -22,6 +22,7 @@ btn2.addEventListener('click', async () => {
 
 //BTN COMANDO
 btn3.addEventListener('click', async () => {
+  console.log("buildando.. .")
   window.electronAPI.comando()
 })
 
