@@ -144,7 +144,7 @@ ipcMain.on('Executacomando', function ExecutaComando() {
 
  const mainWindow = new BrowserWindow({
     autoHideMenuBar: true,
-    width: 400, height: 600,
+    width: 1200, height: 600,
   })
   mainWindow.loadFile('views/loading.html')
 
