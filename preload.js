@@ -6,7 +6,9 @@ contextBridge.exposeInMainWorld('electronAPI',{
   escreveBackground: () => ipcRenderer.send('escreveBackground'),
   comando: () => ipcRenderer.send('Executacomando'),
   encontraUnity: () => ipcRenderer.send('LocalizaUnity'),
-  encontraProjeto: () => ipcRenderer.send('LocalizaProjeto')
+  encontraProjeto: () => ipcRenderer.send('LocalizaProjeto'),
+  abreajuda: ()=>ipcRenderer.send('AbreAjuda')
+
 })
 
 ipcRenderer.send('resize-window', 1280, 768)

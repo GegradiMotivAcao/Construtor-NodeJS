@@ -104,6 +104,18 @@ ipcMain.on('LocalizaProjeto', async () => {
   }
 })
 
+ipcMain.on('AbreAjuda', async () => {
+
+  const mainWindow = new BrowserWindow({
+    autoHideMenuBar: true,
+    width: 850, height: 700,
+    resizable: false
+
+  })
+  mainWindow.loadFile('views/ajuda.html')
+
+})
+
 //Função que chama a linha de comando no prompt/terminal
 ipcMain.on('Executacomando', function ExecutaComando() {
 
@@ -115,8 +127,6 @@ ipcMain.on('Executacomando', function ExecutaComando() {
     message: 'Você precisa selecionar uma instalação do unity. (Ex: "unity.exe")',
   };
 
-  
-
   if(!OKunity) {
     console.log("Falta unity!") 
     dialog.showMessageBox(null, options);
@@ -126,7 +136,6 @@ ipcMain.on('Executacomando', function ExecutaComando() {
     console.log("Falta projeto!") 
     options.message = 'Você precisa selecionar uma pasta de projeto MotivaAção. '
     dialog.showMessageBox(null, options);
-
     return
   }
   if(!OKbg) {

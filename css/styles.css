@@ -996,3 +996,54 @@ div { position: absolute; }
 	align-items: center; /* Can be changed in the live sample */
 	
   }
+
+  #containerajuda{
+	top:15px;
+	margin-left: 35%;
+    width: 790px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+  } 
+
+  #containerajuda h1{
+  font-family: Poppins;
+	font-size: 35px;
+	text-align: left;
+	line-height: 40px;
+	color:#F49A53; 
+}
+
+#containerajuda p{
+	font-family: Poppins;
+	  font-size: 20px;
+	  text-align: left;
+	  line-height: 30px;
+	  color:#333; 
+  }
+
+  #imagensajuda{
+	display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+  }
+
+  #imagensajuda img{
+	position: relative;
+	margin-left: 40px;
+  }
+
+  #containerajuda ul {
+	font-family: Poppins;
+	  font-size: 20px;
+	  text-align: left;
+	  line-height: 30px;
+	  color:#333; 
+  }
+
+  
