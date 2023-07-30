@@ -1,4 +1,4 @@
-const {app, BrowserWindow, ipcMain, dialog} = require('electron')
+const {app, BrowserWindow, ipcMain, dialog, shell } = require('electron')
 const { exec } = require("child_process"); //permite executar linha no cmd/terminal
 const path = require('path')
 const fs = require('fs');
@@ -8,6 +8,10 @@ let enderecoSelect= {};
 let Unity="";
 let Projeto="";
 
+let OKunity = false;
+let OKproj = false;
+let OKbg = false;
+let OKimg = false;
 //RODAR: npm run start
 
 //FUNÇÃO QUE ABRE O DIALOG DE SELECIONAR ARQUIVOS
@@ -37,7 +41,7 @@ ipcMain.on('escreveBackground', async () => {
   const pathdoarq = await handleFileOpen();
   nomeArq = path.basename(pathdoarq);
   //copia a imagem para o \resources do projeto unity
-  exec( 'copy '+ '"' + pathdoarq +'" '+ '"' + Projeto + '\\Assets\\Resources"', (error, stdout, stderr) => {
+  exec( 'copy '+ '"' + pathdoarq +'" '+ '"' + Projeto + '\\Assets\\Resources\\backgrounds"', (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
         return;
@@ -46,21 +50,22 @@ ipcMain.on('escreveBackground', async () => {
         console.log(`stderr: ${stderr}`);
         return;
     }
-    console.log(`stdout: ${stdout}`);
-    fs.appendFile(Projeto + '\\Assets\\Resources\\lista.txt', nomeArq + ";0\n", function (err) {
+    console.log(`stdout: SUCESSO! ${stdout}`);
+    fs.appendFile(Projeto + '\\Assets\\Resources\\lista.txt', "backgrounds\\" + nomeArq + ";0;0\n", function (err) {
       if (err) throw err;
       console.log('BG Salvo!');
     });
+    OKbg = true;
 });
 
-})
+});
 
 //escreve caminhos de Elementos no arquivo
 ipcMain.on('escreveElemento', async () => {
   const pathdoarq = await handleFileOpen();
   nomeArq = path.basename(pathdoarq);
 
-  exec( 'copy '+ '"' + pathdoarq +'" '+ '"' + Projeto + '\\Assets\\Resources"', (error, stdout, stderr) => {
+  exec( 'copy '+ '"' + pathdoarq +'" '+ '"' + Projeto + '\\Assets\\Resources\\objetos"', (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
         return;
@@ -70,10 +75,11 @@ ipcMain.on('escreveElemento', async () => {
         return;
     }
     console.log(`stdout: ${stdout}`);
-    fs.appendFile(Projeto + '\\Assets\\Resources\\lista.txt', nomeArq + ";1\n", function (err) {
+    fs.appendFile(Projeto + '\\Assets\\Resources\\lista.txt', "objetos\\"+ nomeArq + ";1;0\n", function (err) {
       if (err) throw err;
       console.log('Elemento Salvo!');
     });
+    OKimg = true;
 });
 
 })
@@ -83,6 +89,9 @@ ipcMain.on('LocalizaUnity', async () => {
   const pathdoUnity = await handleFileOpen();
   Unity = pathdoUnity;
   console.log("Unity: "+ pathdoUnity);
+  if (pathdoUnity) {
+    OKunity = true;
+  }
 })
 
 //Recebe o endereço do projeto
@@ -90,10 +99,55 @@ ipcMain.on('LocalizaProjeto', async () => {
   const pathdoProjeto = await handleFolderOpen();
   Projeto = pathdoProjeto;
   console.log("Proj: "+ pathdoProjeto);
+  if(pathdoProjeto){
+    OKproj=true;
+  }
 })
 
 //Função que chama a linha de comando no prompt/terminal
 ipcMain.on('Executacomando', function ExecutaComando() {
+
+  const options = {
+    type: 'question',
+    buttons: ['OK'],
+    defaultId: 2,
+    title: 'Erro!',
+    message: 'Você precisa selecionar uma instalação do unity. (Ex: "unity.exe")',
+  };
+
+  
+
+  if(!OKunity) {
+    console.log("Falta unity!") 
+    dialog.showMessageBox(null, options);
+    return
+  }
+  if(!OKproj) {
+    console.log("Falta projeto!") 
+    options.message = 'Você precisa selecionar uma pasta de projeto MotivaAção. '
+    dialog.showMessageBox(null, options);
+
+    return
+  }
+  if(!OKbg) {
+    console.log("Falta BG!") 
+    options.message = 'Você precisa selecionar uma imagem de fundo para sua cena.'
+    dialog.showMessageBox(null, options);
+    return
+  }
+  if(!OKimg) {
+    console.log("Falta imagens!") 
+    options.message = 'Você precisa selecionar uma ou mais imagens de componentes para sua cena.'
+    dialog.showMessageBox(null, options);
+    return
+  }
+
+ const mainWindow = new BrowserWindow({
+    autoHideMenuBar: true,
+    width: 400, height: 600,
+  })
+  mainWindow.loadFile('views/loading.html')
+
   exec( '"'+ Unity +'" -batchmode -quit -projectPath '+ Projeto +' -executeMethod BuilderLinhaComando.PerformBuild', (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
@@ -103,7 +157,10 @@ ipcMain.on('Executacomando', function ExecutaComando() {
         console.log(`stderr: ${stderr}`);
         return;
     }
-    console.log(`stdout: ${stdout}`);
+    console.log(`stdout: SUCCESS ${stdout}`);
+    mainWindow.close();
+
+    shell.openPath(Projeto)
 });
 })
 
@@ -113,6 +170,7 @@ ipcMain.on('Executacomando', function ExecutaComando() {
 
 function createWindow () {
   const mainWindow = new BrowserWindow({
+    autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }, resizable: false

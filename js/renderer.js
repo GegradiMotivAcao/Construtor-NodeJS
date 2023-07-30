@@ -14,12 +14,6 @@ btn.addEventListener('click', async () => {
 
 })
 
-//BTN AVANÇAR
-btn2.addEventListener('click', async () => {
-  //DA HIDE NO DIV ATUAL E PASSA PRO PRÓXIMO DIV DE SELEÇÃO
- // window.electronAPI.escreveElemento(7)
-})
-
 //BTN COMANDO
 btn3.addEventListener('click', async () => {
   console.log("buildando.. .")

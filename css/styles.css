@@ -81,7 +81,7 @@ div { position: absolute; }
 
 #botão2 {
 	top: 875px;
-	left: 375px;
+	left: 530px;
 	width: 170px;
 	height: 60px;
 	position: absolute;
@@ -97,7 +97,7 @@ div { position: absolute; }
 #rectangle_5 {
 	top: 0px;
 	left: 0px;
-	width: 170px;
+	width: 200px;
 	height: 60px;
 	-ms-border-radius: 64px;
 	-o-border-radius: 64px;
@@ -169,7 +169,7 @@ div { position: absolute; }
 #posicionamento {
 	top: 18px;
 	left: 0px;
-	width: 139px;
+	width: 160px;
 	height: 44px;
 	overflow: hidden;
 	font-family: Poppins;
@@ -791,7 +791,7 @@ div { position: absolute; }
 	z-index: 99;
 }
 
-#btn_add_bg {
+#btn_add_unity{
 	top: 220px;
     left: 1201px;
     width: 200px;
@@ -800,7 +800,7 @@ div { position: absolute; }
 	z-index: 99;
 }
 
-#btn_add_unity {
+#btn_add_bg {
 	
 }
 
@@ -935,3 +935,64 @@ div { position: absolute; }
 
 
 /* Add your custom CSS here */
+/* Popup container */
+.popup {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+  }
+  
+  /* The actual popup (appears on top) */
+  .popup .popuptext {
+	visibility: hidden;
+	width: 160px;
+	background-color: #555;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 8px 0;
+	position: absolute;
+	z-index: 1;
+	bottom: 125%;
+	left: 50%;
+	margin-left: -80px;
+  }
+  
+  /* Popup arrow */
+  .popup .popuptext::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #555 transparent transparent transparent;
+  }
+  
+  /* Toggle this class when clicking on the popup container (hide and show the popup) */
+  .popup .show {
+	visibility: visible;
+	-webkit-animation: fadeIn 1s;
+	animation: fadeIn 1s
+  }
+  
+  /* Add animation (fade in the popup) */
+  @-webkit-keyframes fadeIn {
+	from {opacity: 0;}
+	to {opacity: 1;}
+  }
+  
+  @keyframes fadeIn {
+	from {opacity: 0;}
+	to {opacity:1 ;}
+  }
+
+  #loading {
+	left:500px;
+	top: 300px;
+	height: 100px;
+	width: 100px;
+	align-items: center; /* Can be changed in the live sample */
+	
+  }
