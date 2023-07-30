@@ -17,7 +17,7 @@ necessidade de adquirir conhecimento em programação e desenvolvimento de softw
 WIN: https://download.unity3d.com/download_unity/59ddc4c59b4f/UnityDownloadAssistant-2018.4.12f1.exe?_ga=2.85339097.1124146852.1639267715-133358924.1632264643  <br>
 <B>IMPORTANTE:</B> Não é necessário abrir o Unity para o construtor operar. Apenas ter o unity 2018.4 em sua máquina.
 </li>
-<li> Baixe o repositório de projeto unity em seu computador (.zip, ou via github desktop) e descompacte. Será este projeto de jogo que utilizaremos no construtor.<br> 
+<li> Baixe a última versão do Construtor - MotivaAção em seu computador (.zip, ou via github desktop) e descompacte. Nesta pasta está o executável do Construtor.<br> 
    <B> LINK: </B> https://github.com/GegradiMotivAcao/Construtor-NodeJS/releases
 </li>
 </ul>
