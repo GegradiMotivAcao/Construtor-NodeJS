@@ -99,6 +99,12 @@ ipcMain.on('LocalizaProjeto', async () => {
   const pathdoProjeto = await handleFolderOpen();
   Projeto = pathdoProjeto;
   console.log("Proj: "+ pathdoProjeto);
+  //limpa o arquivo de imagens
+  fs.writeFile(Projeto + '\\Assets\\Resources\\lista.txt', "", function (err) {
+    if (err) throw err;
+    console.log('Arquivo de referencias limpo!');
+  });
+
   if(pathdoProjeto){
     OKproj=true;
   }
@@ -208,4 +214,5 @@ app.on('window-all-closed', function () {
 
 ///////////////////////////////////////////////////////////
 //build com electron: 
-//npx electron-packager <sourcedir> <appname> --platform=win32
+//npx electron-packager D:\Projetos\GEGRADI\Builder-NodeJS\Construtor-NodeJS MotivAçao --platform=win32 --icon: D:\Projetos\GEGRADI\Builder-NodeJS\Construtor-NodeJS\skins\logoMotiv.png
+//MotivaAção-Construtor-win32-x64
