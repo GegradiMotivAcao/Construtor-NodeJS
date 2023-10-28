@@ -99,6 +99,7 @@ ipcMain.on('LocalizaProjeto', async () => {
   const pathdoProjeto = await handleFolderOpen();
   Projeto = pathdoProjeto;
   console.log("Proj: "+ pathdoProjeto);
+  
   if(pathdoProjeto){
     OKproj=true;
   }
@@ -169,7 +170,12 @@ ipcMain.on('Executacomando', function ExecutaComando() {
     console.log(`stdout: SUCCESS ${stdout}`);
     mainWindow.close();
 
-    shell.openPath(Projeto)
+    shell.openPath(Projeto);
+    //limpa as referências
+    /*fs.writeFileSync(Projeto + '\\Assets\\Resources\\lista.txt', "", function (err) {
+      if (err) throw err;
+      console.log('Referências limpas!');
+    });*/
 });
 })
 
