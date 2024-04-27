@@ -119,65 +119,69 @@ ipcMain.on('AbreAjuda', async () => {
 
 //Função que chama a linha de comando no prompt/terminal
 ipcMain.on('Executacomando', function ExecutaComando() {
-
   const options = {
-    type: 'question',
+    type: 'error',
     buttons: ['OK'],
-    defaultId: 2,
     title: 'Erro!',
-    message: 'Você precisa selecionar uma instalação do unity. (Ex: "unity.exe")',
+    message: 'Erro ao executar o comando!',
   };
 
   if(!OKunity) {
-    console.log("Falta unity!") 
+    console.log("Falta unity!");
+    options.message = 'Você precisa selecionar uma instalação do unity. (Ex: "unity.exe")';
     dialog.showMessageBox(null, options);
-    return
+    return;
   }
   if(!OKproj) {
-    console.log("Falta projeto!") 
-    options.message = 'Você precisa selecionar uma pasta de projeto MotivaAção. '
+    console.log("Falta projeto!");
+    options.message = 'Você precisa selecionar uma pasta de projeto MotivaAção.';
     dialog.showMessageBox(null, options);
-    return
+    return;
   }
   if(!OKbg) {
-    console.log("Falta BG!") 
-    options.message = 'Você precisa selecionar uma imagem de fundo para sua cena.'
+    console.log("Falta BG!");
+    options.message = 'Você precisa selecionar uma imagem de fundo para sua cena.';
     dialog.showMessageBox(null, options);
-    return
+    return;
   }
   if(!OKimg) {
-    console.log("Falta imagens!") 
-    options.message = 'Você precisa selecionar uma ou mais imagens de componentes para sua cena.'
+    console.log("Falta imagens!");
+    options.message = 'Você precisa selecionar uma ou mais imagens de componentes para sua cena.';
     dialog.showMessageBox(null, options);
-    return
+    return;
   }
 
- const mainWindow = new BrowserWindow({
+  const mainWindow = new BrowserWindow({
     autoHideMenuBar: true,
-    width: 1200, height: 600,
-  })
-  mainWindow.loadFile('views/loading.html')
+    width: 1200,
+    height: 600
+  });
+  mainWindow.loadFile('views/loading.html');
 
-  exec( '"'+ Unity +'" -batchmode -quit -projectPath '+ Projeto +' -executeMethod BuilderLinhaComando.PerformBuild', (error, stdout, stderr) => {
+  const command = `"${Unity}" -batchmode -quit -projectPath "${Projeto}" -executeMethod BuilderLinhaComando.PerformBuild`;
+  exec(command, (error, stdout, stderr) => {
+    mainWindow.close(); // Ensure the window closes after execution
+    
     if (error) {
-        console.log(`error: ${error.message}`);
-        return;
+      console.error(`error: ${error.message}`);
+      options.message = `Erro ao executar o comando: ${error.message}`;
+      dialog.showMessageBox(null, options);
+      return;
     }
     if (stderr) {
-        console.log(`stderr: ${stderr}`);
-        return;
+      console.log(`stderr: ${stderr}`);
+      options.message = `Erro ao executar o comando: ${stderr}`;
+      dialog.showMessageBox(null, options);
+      return;
     }
     console.log(`stdout: SUCCESS ${stdout}`);
-    mainWindow.close();
-
     shell.openPath(Projeto);
-    //limpa as referências
-    fs.writeFileSync(Projeto + '\\Assets\\Resources\\lista.txt', "", function (err) {
-      if (err) throw err;
-      console.log('Referências limpas!');
-    });
+    
+    // Limpa referencias
+    fs.writeFileSync(path.join(Projeto, 'Assets', 'Resources', 'lista.txt'), "");
+    console.log('Referências limpas!');
+  });
 });
-})
 
 
 /////////////////////////////////////////
