@@ -11,7 +11,7 @@ contextBridge.exposeInMainWorld('electronAPI',{
 
 })
 
-ipcRenderer.send('resize-window', 1280, 768)
+ipcRenderer.send('resize-window', 1280, 870)
 
 
 
