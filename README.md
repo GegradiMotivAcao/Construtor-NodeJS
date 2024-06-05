@@ -1,7 +1,7 @@
 # Construtor / Jogos MotivAção - GEGRADI - UFPel
 
 Repositório para projeto de Builder Local para jogos na plataforma GEGRADI - MotivAção. <br>
-Esta plataforma tem como proposito facilitar a criação de jogos digitais que utilizem o método MotivaAção: A edição de imagens urbanas  que motivem nos 
+Esta plataforma tem como proposito facilitar a criação de jogos digitais que utilizem o método MotivaAção: A edição de imagens urbanas que motivem nos 
 usuários o desejo de transformação dos espaços.<br> 
 Com base nos resultados dos feedbacks de ações extensionistas, a criação desta plataforma foi guiada pela proposta da geração de jogos sem a 
 necessidade de adquirir conhecimento em programação e desenvolvimento de software, expandindo o público alvo (extensionistas, professores, alunos).
@@ -34,7 +34,7 @@ WIN: https://download.unity3d.com/download_unity/dbb5675dce2d/UnityDownloadAssis
                 <li><b>Componentes</b> -Devemos selecionar imagens de componentes para a cena do jogo. Selecione quantas quiser. <b>Importante:</b> As imagens de componentes devem ser em formato <b>.png </b>
                     sem fundo e com dimensões <b>1366 x 768</b> para melhor encaixe na cena. Clique em "Adicionar imagens" para abrir a janela de seleção.</li>
                 <br>
-                <li><b>Contruir!</b> - Após selecionar as 4 partes para seu jogo, clique em "Construir!" para começar a construção. Ao terminar o contrutor abrirá a pasta onde se encontra seu projeto, na pasta <b>EXECUTAVEL.</b> </li>
+                <li><b>Construir!</b> - Após selecionar as 4 partes para seu jogo, clique em "Construir!" para começar a construção. Ao terminar o contrutor abrirá a pasta onde se encontra seu projeto, na pasta <b>EXECUTAVEL.</b> </li>
               </ul>
         </p>
         <br>
